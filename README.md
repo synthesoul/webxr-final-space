@@ -28,3 +28,13 @@ The model is loaded from the Khronos sample repository for demonstration. For
 public deployment, replace it with a locally hosted asset whose license you
 have verified. This project is prepared locally; it has not been pushed to
 GitHub.
+
+## Research article and licensing
+
+- [Research article](./RESEARCH_ARTICLE.md)
+- [Third-party notices](./THIRD_PARTY_NOTICES.md)
+- [MIT License](./LICENSE)
+
+The article includes APA-style citations, limitations, and an AI-use
+disclosure. The MIT license applies to the original project files only;
+third-party libraries and the demonstration model retain their own licenses.
