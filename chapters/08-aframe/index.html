@@ -1,0 +1,45 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>A-Frame ECS and Three.js Bridge</title>
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <a-scene
+    background="color: #111827"
+    fog="type: exponential; density: 0.035; color: #111827"
+    renderer="colorManagement: true; antialias: true"
+    xr-mode-ui="XRMode: xr">
+
+    <a-assets>
+      <img id="grid-texture" alt="A subtle grid texture" src="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='128' height='128' viewBox='0 0 128 128'%3E%3Crect width='128' height='128' fill='%231f2937'/%3E%3Cpath d='M0 0h128v128H0z' fill='none' stroke='%23374151' stroke-width='2'/%3E%3Cpath d='M32 0v128M64 0v128M96 0v128M0 32h128M0 64h128M0 96h128' stroke='%232f3b4d' stroke-width='1'/%3E%3C/svg%3E">
+    </a-assets>
+
+    <a-entity id="rig" position="0 1.6 0">
+      <a-camera look-controls wasd-controls></a-camera>
+    </a-entity>
+
+    <a-entity light="type: ambient; color: #b8c7ff; intensity: 0.55"></a-entity>
+    <a-entity light="type: directional; color: #ffffff; intensity: 1.4" position="-3 6 4"></a-entity>
+
+    <a-plane position="0 0 -4" rotation="-90 0 0" width="24" height="24"
+      material="src: #grid-texture; repeat: 12 12; roughness: 0.95"></a-plane>
+
+    <a-box id="wire-box" position="-1 1.3 -4" depth="1.2" height="1.2" width="1.2"
+      material="color: #38bdf8; metalness: 0.25; roughness: 0.35"
+      three-wireframe="color: #e0f2fe"></a-box>
+
+    <a-sphere position="1 1.4 -4" radius="0.9" color="#f472b6"
+      orbit-pulse="radius: 0.55; speed: 1.2; height: 0.28"></a-sphere>
+
+    <a-cylinder position="0 0.65 -2.5" radius="0.45" height="1.3" color="#fbbf24"
+      animation="property: rotation; to: 0 360 0; loop: true; dur: 5000; easing: linear"></a-cylinder>
+
+    <a-text value="A-FRAME / ECS" align="center" color="#e0f2fe" width="5" position="0 3 -4"></a-text>
+    <a-sky color="#111827"></a-sky>
+  </a-scene>
+</body>
+</html>
