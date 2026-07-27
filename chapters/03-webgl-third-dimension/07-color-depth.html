@@ -1,0 +1,19 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>07 Color and Depth</title>
+<style>html,body{margin:0;height:100%;background:#080b14;color:#fff;font:16px system-ui}canvas{display:block;width:100%;height:100%}p{position:fixed;left:1rem;top:.5rem;background:#0009;padding:.5rem}</style></head>
+<body><p>07 — two z-offset squares, depth test, and interpolated color</p><canvas id="gl-canvas"></canvas>
+<script>
+const canvas=document.querySelector('#gl-canvas'),gl=canvas.getContext('webgl');if(!gl)throw Error('WebGL unavailable');
+const vs=`attribute vec3 a_position;attribute vec4 a_color;varying lowp vec4 v_color;void main(){gl_Position=vec4(a_position,1);v_color=a_color;}`;
+const fs=`precision mediump float;varying lowp vec4 v_color;void main(){gl_FragColor=v_color;}`;
+function makeShader(t,s){const x=gl.createShader(t);gl.shaderSource(x,s);gl.compileShader(x);if(!gl.getShaderParameter(x,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(x));return x;}
+const p=gl.createProgram();gl.attachShader(p,makeShader(gl.VERTEX_SHADER,vs));gl.attachShader(p,makeShader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(p);if(!gl.getProgramParameter(p,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(p));gl.useProgram(p);
+const vertices=new Float32Array([
+ -0.55,-0.55,-0.35, 0.55,-0.55,-0.35, 0.55,0.55,-0.35, -0.55,-0.55,-0.35, 0.55,0.55,-0.35, -0.55,0.55,-0.35,
+ -0.35,-0.35,0.35, 0.65,-0.35,0.35, 0.65,0.65,0.35, -0.35,-0.35,0.35, 0.65,0.65,0.35, -0.35,0.65,0.35]);
+const colors=new Float32Array([
+ 0,0.2,1,1, 0,0.7,1,1, 0.2,0.3,1,1, 0,0.2,1,1, 0.2,0.3,1,1, 0,0.7,1,1,
+ 1,0.1,0.1,1, 1,0.6,0.1,1, 0.8,0.1,0.2,1, 1,0.1,0.1,1, 0.8,0.1,0.2,1, 1,0.6,0.1,1]);
+function attribute(name,data,size){const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);const loc=gl.getAttribLocation(p,name);gl.enableVertexAttribArray(loc);gl.vertexAttribPointer(loc,size,gl.FLOAT,false,0,0);}
+attribute('a_position',vertices,3);attribute('a_color',colors,4);gl.enable(gl.DEPTH_TEST);gl.depthFunc(gl.LESS);gl.clearColor(0.02,0.03,0.08,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.drawArrays(gl.TRIANGLES,0,12);
+</script></body></html>

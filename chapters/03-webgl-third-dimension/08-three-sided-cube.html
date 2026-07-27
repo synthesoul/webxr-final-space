@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>08 Three-Sided Cube</title>
+<style>html,body{margin:0;height:100%;background:#080b14;color:#fff;font:16px system-ui}canvas{display:block;width:100%;height:100%}p{position:fixed;left:1rem;top:.5rem;background:#0009;padding:.5rem}</style></head>
+<body><p>08 — three faces, depth testing, and explicit x/y/z coordinates</p><canvas id="gl-canvas"></canvas>
+<script>
+const c=document.querySelector('#gl-canvas'),gl=c.getContext('webgl');if(!gl)throw Error('WebGL unavailable');
+const vs=`attribute vec3 p;attribute vec3 col;varying vec3 v;void main(){gl_Position=vec4(p,1);v=col;}`,fs=`precision mediump float;varying vec3 v;void main(){gl_FragColor=vec4(v,1);}`;
+function s(t,x){const q=gl.createShader(t);gl.shaderSource(q,x);gl.compileShader(q);if(!gl.getShaderParameter(q,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(q));return q;}
+const prog=gl.createProgram();gl.attachShader(prog,s(gl.VERTEX_SHADER,vs));gl.attachShader(prog,s(gl.FRAGMENT_SHADER,fs));gl.linkProgram(prog);if(!gl.getProgramParameter(prog,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(prog));gl.useProgram(prog);
+const v=new Float32Array([
+ -0.5,-0.5,-0.4,0.5,-0.5,-0.4,0.5,0.5,-0.4,-0.5,-0.5,-0.4,0.5,0.5,-0.4,-0.5,0.5,-0.4,
+ -0.5,-0.5,-0.4,-0.5,0.5,-0.4,-0.2,0.5,0.4,-0.5,-0.5,-0.4,-0.2,0.5,0.4,-0.2,-0.5,0.4,
+ -0.5,0.5,-0.4,0.5,0.5,-0.4,-0.2,0.5,0.4,-0.2,0.5,0.4,-0.5,0.5,-0.4,0.2,0.5,0.4]);
+const colors=new Float32Array(Array(6).fill([0.1,0.35,1,0.1,0.9,0.3,0.95,0.2,0.2]).flat());
+function attr(n,d,size){const b=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,b);gl.bufferData(gl.ARRAY_BUFFER,d,gl.STATIC_DRAW);const a=gl.getAttribLocation(prog,n);gl.enableVertexAttribArray(a);gl.vertexAttribPointer(a,size,gl.FLOAT,false,0,0);}attr('p',v,3);attr('col',colors,3);gl.enable(gl.DEPTH_TEST);gl.clearColor(0.02,0.03,0.08,1);gl.clear(gl.COLOR_BUFFER_BIT|gl.DEPTH_BUFFER_BIT);gl.drawArrays(gl.TRIANGLES,0,18);
+</script></body></html>
