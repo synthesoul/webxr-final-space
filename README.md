@@ -6,15 +6,16 @@ WebGL to Three.js, WebXR, A-Frame, physics, and animated glTF models.
 
 ## Chapters and demos
 
-1. [Chapter 2 — WebGL foundations](./chapters/02-webgl-foundations/)
-2. [Chapter 3 — WebGL third dimension](./chapters/03-webgl-third-dimension/)
-3. [Chapter 4 — matrices and perspective](./chapters/04-webgl-matrices-perspective/)
-4. [Chapter 5 — Three.js](./chapters/05-threejs/)
-5. [Chapter 6 — WebXR VR](./chapters/06-webxr-vr/)
-6. [Chapter 7 — WebXR AR and hit testing](./chapters/07-webxr-ar/)
-7. [Chapter 8 — A-Frame ECS](./chapters/08-aframe/)
-8. [Chapter 9 — A-Frame physics and interaction](./chapters/09-aframe-physics/)
-9. [Chapter 10 — animated glTF and AR deployment](./chapters/10-aframe-gltf-ar/)
+1. [Chapter 1 — Getting started](./chapters/01-getting-started/)
+2. [Chapter 2 — WebGL foundations](./chapters/02-webgl-foundations/)
+3. [Chapter 3 — WebGL third dimension](./chapters/03-webgl-third-dimension/)
+4. [Chapter 4 — matrices and perspective](./chapters/04-webgl-matrices-perspective/)
+5. [Chapter 5 — Three.js](./chapters/05-threejs/)
+6. [Chapter 6 — WebXR VR](./chapters/06-webxr-vr/)
+7. [Chapter 7 — WebXR AR and hit testing](./chapters/07-webxr-ar/)
+8. [Chapter 8 — A-Frame ECS](./chapters/08-aframe/)
+9. [Chapter 9 — A-Frame physics and interaction](./chapters/09-aframe-physics/)
+10. [Chapter 10 — animated glTF and AR deployment](./chapters/10-aframe-gltf-ar/)
 
 ## Capstone
 
