@@ -1,0 +1,16 @@
+<!doctype html>
+<html lang="en"><head><meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1"><title>03 WebGL Buffers</title>
+<style>html,body{margin:0;height:100%;background:#080b14;color:#fff;font:16px system-ui}canvas{display:block;width:100%;height:100%}p{position:fixed;left:1rem;top:.5rem;background:#0009;padding:.5rem}</style></head>
+<body><p>03 — interleaved position + color attributes</p><canvas id="gl-canvas"></canvas>
+<script>
+const canvas = document.querySelector('#gl-canvas'), gl = canvas.getContext('webgl'); if (!gl) throw new Error('WebGL unavailable');
+const vs = `attribute vec2 a_position; attribute vec3 a_color; varying vec3 v_color; void main(){gl_Position=vec4(a_position,0,1);v_color=a_color;}`;
+const fs = `precision mediump float; varying vec3 v_color; void main(){gl_FragColor=vec4(v_color,1);}`;
+function shader(type, source){const s=gl.createShader(type);gl.shaderSource(s,source);gl.compileShader(s);if(!gl.getShaderParameter(s,gl.COMPILE_STATUS))throw Error(gl.getShaderInfoLog(s));return s;}
+const program=gl.createProgram();gl.attachShader(program,shader(gl.VERTEX_SHADER,vs));gl.attachShader(program,shader(gl.FRAGMENT_SHADER,fs));gl.linkProgram(program);if(!gl.getProgramParameter(program,gl.LINK_STATUS))throw Error(gl.getProgramInfoLog(program));gl.useProgram(program);
+const data=new Float32Array([-0.8,-0.7,1,0.2,0.3, 0.8,-0.7,0.2,1,0.4, 0,0.75,0.2,0.8,1]);
+const buffer=gl.createBuffer();gl.bindBuffer(gl.ARRAY_BUFFER,buffer);gl.bufferData(gl.ARRAY_BUFFER,data,gl.STATIC_DRAW);
+const stride=5*Float32Array.BYTES_PER_ELEMENT, pos=gl.getAttribLocation(program,'a_position'), color=gl.getAttribLocation(program,'a_color');
+gl.enableVertexAttribArray(pos);gl.vertexAttribPointer(pos,2,gl.FLOAT,false,stride,0);gl.enableVertexAttribArray(color);gl.vertexAttribPointer(color,3,gl.FLOAT,false,stride,2*Float32Array.BYTES_PER_ELEMENT);
+gl.clearColor(0.02,0.03,0.08,1);gl.clear(gl.COLOR_BUFFER_BIT);gl.drawArrays(gl.TRIANGLES,0,3);
+</script></body></html>
