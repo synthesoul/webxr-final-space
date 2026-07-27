@@ -1,40 +1,44 @@
-# WebXR Final Space
+# WebXR Course Archive and Final Space
 
-This capstone combines the course progression into one A-Frame scene:
+This repository organizes the WebXR study demos by chapter and keeps the
+capstone research artifact separate. The examples follow the progression from
+WebGL to Three.js, WebXR, A-Frame, physics, and animated glTF models.
 
-| Course idea | Demo feature |
-| --- | --- |
-| WebGL and GLSL | `shader-orb` uses a custom vertex/fragment shader |
-| Matrices and transformations | `matrix-spin`, rotations, positions, and scales |
-| Three.js | A-Frame reaches `THREE.ShaderMaterial` and `object3D` |
-| WebXR VR/AR | A-Frame XR mode UI, WebXR optional features, controllers |
-| A-Frame ECS | Declarative entities plus custom components |
-| Physics | CANNON-based dynamic bodies, gravity, collisions, impulses |
-| User interaction | Mouse cursor and XR controller rays push objects |
-| glTF | Khronos CesiumMan `.glb` asset |
-| Animation | A-Frame Extras `animation-mixer` |
-| Deployment | HTTPS-ready structure for GitHub Pages |
+## Chapters and demos
 
-Run locally:
+1. [Chapter 2 — WebGL foundations](./chapters/02-webgl-foundations/)
+2. [Chapter 3 — WebGL third dimension](./chapters/03-webgl-third-dimension/)
+3. [Chapter 4 — matrices and perspective](./chapters/04-webgl-matrices-perspective/)
+4. [Chapter 5 — Three.js](./chapters/05-threejs/)
+5. [Chapter 6 — WebXR VR](./chapters/06-webxr-vr/)
+6. [Chapter 7 — WebXR AR and hit testing](./chapters/07-webxr-ar/)
+7. [Chapter 8 — A-Frame ECS](./chapters/08-aframe/)
+8. [Chapter 9 — A-Frame physics and interaction](./chapters/09-aframe-physics/)
+9. [Chapter 10 — animated glTF and AR deployment](./chapters/10-aframe-gltf-ar/)
 
-```text
-http://127.0.0.1:8081/17-final-space/
-```
+## Capstone
 
-Desktop controls: drag to look, use WASD/arrow keys to move, and click the
-physics bodies. In immersive XR, use physical movement and controller triggers.
+[WebXR Final Space](./capstone/webxr-final-space/)
 
-The model is loaded from the Khronos sample repository for demonstration. For
-public deployment, replace it with a locally hosted asset whose license you
-have verified. This project is prepared locally; it has not been pushed to
-GitHub.
+The capstone combines custom GLSL, transforms, Three.js access, WebXR, A-Frame
+components, physics, controller interaction, glTF, and animation.
 
-## Research article and licensing
+## Research and licensing
 
-- [Research article](./RESEARCH_ARTICLE.md)
+- [APA research article](./RESEARCH_ARTICLE.md)
 - [Third-party notices](./THIRD_PARTY_NOTICES.md)
 - [MIT License](./LICENSE)
 
-The article includes APA-style citations, limitations, and an AI-use
-disclosure. The MIT license applies to the original project files only;
-third-party libraries and the demonstration model retain their own licenses.
+The MIT license applies to Christian Busca's original project files. External
+libraries, documentation, and the demonstration model retain their own terms.
+
+## Local preview
+
+Serve the archive's parent directory and open the individual chapter folders:
+
+```bash
+python3 -m http.server 8081
+```
+
+The deployed repository is public at
+<https://github.com/synthesoul/webxr-final-space>.
