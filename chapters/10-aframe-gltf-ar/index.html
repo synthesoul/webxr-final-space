@@ -1,0 +1,41 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Animated glTF AR with A-Frame</title>
+  <script src="https://aframe.io/releases/1.8.0/aframe.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/c-frame/aframe-extras@7.6.1/dist/aframe-extras.min.js"></script>
+  <script src="./main.js" defer></script>
+</head>
+<body>
+  <a-scene
+    renderer="colorManagement: true; physicallyCorrectLights: true"
+    webxr="optionalFeatures: local-floor"
+    xr-mode-ui="XRMode: ar">
+
+    <a-assets timeout="30000">
+      <a-asset-item id="cesium-man"
+        src="https://raw.githubusercontent.com/KhronosGroup/glTF-Sample-Assets/main/Models/CesiumMan/glTF-Binary/CesiumMan.glb"></a-asset-item>
+    </a-assets>
+
+    <a-entity camera position="0 1.6 3" look-controls
+      wasd-controls="acceleration: 20"></a-entity>
+    <a-entity light="type: ambient; color: #ffffff; intensity: 1.2"></a-entity>
+    <a-entity light="type: directional; color: #ffffff; intensity: 2" position="2 4 3"></a-entity>
+
+    <a-plane position="0 0 -2" rotation="-90 0 0" width="8" height="8" color="#263238"></a-plane>
+    <a-entity id="model"
+      gltf-model="#cesium-man"
+      animation-mixer="clip: *; loop: repeat"
+      position="0 0 -2"
+      rotation="0 180 0"
+      scale="1.1 1.1 1.1"
+      model-status></a-entity>
+
+    <a-text id="status" value="Loading glTF model..." align="center" color="#ffffff" width="5"
+      position="0 2.8 -2"></a-text>
+    <a-sky color="#dbeafe"></a-sky>
+  </a-scene>
+</body>
+</html>
